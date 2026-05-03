@@ -57,8 +57,11 @@ const AdminPage = () => {
         setEditingItem(null)
     }
 
-    const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>, type: 'skills' | 'work' | 'messages') => {
-        if (type === 'messages') return
+    const handleFileUpload = async (
+        e: React.ChangeEvent<HTMLInputElement>,
+        type: "skills" | "work" | "messages"
+    ) => {
+        if (type === "messages") return
         const file = e.target.files?.[0]
         if (!file) return
 
@@ -71,7 +74,7 @@ const AdminPage = () => {
             body: formData
         })
         const json = await res.json()
-        
+
         if (json.success) {
             setEditingItem({ ...editingItem, img: json.url })
         }
