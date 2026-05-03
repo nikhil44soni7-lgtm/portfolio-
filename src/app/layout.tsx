@@ -7,8 +7,8 @@ import SmoothScroll from '@/components/SmoothScroll'
 import { ThemeProvider } from '@/components/ThemeProvider'
 
 export const metadata: Metadata = {
-  title: 'Aura Creative | 3D Design Portfolio',
-  description: 'Minimalist 3D portfolio for UI/UX, Graphic Design and Video Editing.',
+  title: 'Harshita Soni | UI/UX Designer & Developer Portfolio',
+  description: 'Portfolio of Harshita Soni — UI/UX Designer, Graphic Designer, Video Editor and Web Developer from Bhilwara, Rajasthan.'
 }
 
 export default function RootLayout({

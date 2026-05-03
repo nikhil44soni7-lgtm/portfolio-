@@ -49,13 +49,13 @@ const Footer = () => {
                 </div>
                 <div>
                     <h4 style={{ marginBottom: '1rem', textTransform: 'uppercase', letterSpacing: '2px', fontSize: '0.9rem' }}>Contact</h4>
-                    <p style={{ opacity: 0.7 }}>hello@aura.design</p>
+                    <p style={{ opacity: 0.7 }}>harshitasoni@email.com</p>
                     <p style={{ opacity: 0.7, marginTop: '0.5rem' }}>London, UK. Global Remote.</p>
                 </div>
             </div>
 
             <div style={{ padding: '2rem 0', borderTop: '1px solid rgba(255,255,255,0.05)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', opacity: 0.6, fontSize: '0.8rem' }}>
-                <p>&copy; 2025 Code By Harshita. All rights reserved.</p>
+                <p>&copy; 2025 Harshita Soni. All rights reserved.</p>
                 <p>Designed for the digital age.</p>
             </div>
         </footer>

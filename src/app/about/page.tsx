@@ -74,7 +74,7 @@ const AboutPage = () => {
                                 We don't just build websites; we sculpt digital brands. Our work lives at the intersection of pixel-level precision and cinematic narrative. Every scroll is a movement, and every movement is an experience.
                             </p>
                             <p style={{ fontSize: '1rem', color: 'var(--text-sub)', opacity: 0.7, lineHeight: '1.8' }}>
-                                Founded on the principle of 'Aura', our design language focuses on creating a unique atmosphere for each digital product. Whether it's a UI for a fintech giant or a commercial reel for a fashion brand, the goal is consistent: Addictive Quality.
+                                My design language is built on creating a unique atmosphere for each digital product. Whether it's a UI for a fintech giant or a commercial reel for a fashion brand, the goal is always the same: Addictive Quality.
                             </p>
                         </div>
                         <div style={{ position: 'relative', borderRadius: '32px', overflow: 'hidden', height: '500px', boxShadow: '0 30px 60px rgba(0,0,0,0.5)' }}>
