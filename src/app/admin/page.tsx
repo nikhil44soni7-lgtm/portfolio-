@@ -313,7 +313,7 @@ const AdminPage = () => {
                                         opacity: isUploading ? 1 : 0,
                                         transition: 'opacity 0.3s'
                                     }} onMouseEnter={(e) => e.currentTarget.style.opacity = '1'} onMouseLeave={(e) => e.currentTarget.style.opacity = '0'}>
-                                        <input type="file" hidden onChange={(e) => {
+                                        <input type="file"  onChange={(e) => {
                                             if (activeTab === "skills" || activeTab === "work") {
                                                 handleFileUpload(e, activeTab);
                                             }
