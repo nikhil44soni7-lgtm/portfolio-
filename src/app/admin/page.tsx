@@ -57,7 +57,8 @@ const AdminPage = () => {
         setEditingItem(null)
     }
 
-    const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>, target: 'skills' | 'work') => {
+    const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>, type: 'skills' | 'work' | 'messages') => {
+        if (type === 'messages') return
         const file = e.target.files?.[0]
         if (!file) return
 
@@ -309,7 +310,7 @@ const AdminPage = () => {
                                         opacity: isUploading ? 1 : 0,
                                         transition: 'opacity 0.3s'
                                     }} onMouseEnter={(e) => e.currentTarget.style.opacity = '1'} onMouseLeave={(e) => e.currentTarget.style.opacity = '0'}>
-                                        <input type="file" hidden onChange={(e) => handleFileUpload(e, activeTab as 'skills' | 'work')} />
+                                        <input type="file" hidden onChange={(e) => handleFileUpload(e, activeTab)} />
                                         <Upload size={24} />
                                     </label>
                                 </div>
