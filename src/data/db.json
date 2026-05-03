@@ -1,0 +1,134 @@
+{
+  "skills": [
+    {
+      "id": 1,
+      "title": "Web Development",
+      "desc": "Developing dynamic, AI-powered web applications with efficient database management and Codeflow integration.",
+      "icon": "Globe",
+      "img": "/web_dev_hero.jpg",
+      "strategy": "Agile AI-driven lifecycle.",
+      "precision": "Automated, clean-code W3C.",
+      "architecture": "MVC + AI-augmented systems."
+    },
+    {
+      "id": 2,
+      "title": "PHP & MySQL",
+      "desc": "Crafting sophisticated, scalable back-end applications with secure and seamless database functionality.",
+      "icon": "Database",
+      "img": "/php_mysql_hero.jpg",
+      "strategy": "Legacy modernization & scale.",
+      "precision": "Secure data integrity layers.",
+      "architecture": "Relational DB schemas."
+    },
+    {
+      "id": 3,
+      "title": "Visual Basic .NET (VB.NET)",
+      "desc": "Utilizing powerful tools for precise and efficient coding of Windows-integrated enterprise applications.",
+      "icon": "Cpu",
+      "img": "/vb_net_hero.jpg",
+      "strategy": "Windows-integrated solutions.",
+      "precision": "Strongly typed logic.",
+      "architecture": "Object-oriented systems."
+    },
+    {
+      "id": 4,
+      "title": "Microsoft Visual Studio Code",
+      "desc": "Optimizing development environments for intuitive, user-friendly interface design and rapid deployment.",
+      "icon": "Monitor",
+      "img": "/vscode_hero.jpg",
+      "strategy": "Intelligent extension management.",
+      "precision": "Snippet-driven speed.",
+      "architecture": "Extensible environment."
+    },
+    {
+      "id": 5,
+      "title": "UI-UX Design",
+      "desc": "Creating visually compelling graphics and layouts through behavioral mapping and high-fidelity prototypes.",
+      "icon": "Figma",
+      "img": "/ui_design_hero.jpg",
+      "strategy": "Behavioral mapping & conversion.",
+      "precision": "Pixel-perfect grids.",
+      "architecture": "Comprehensive design systems."
+    },
+    {
+      "id": 6,
+      "title": "Adobe InDesign & Photoshop",
+      "desc": "Expertly crafting high-fidelity visual assets and multi-page layouts with cross-platform optimization.",
+      "icon": "ImageIcon",
+      "img": "/adobe_suite_hero.jpg",
+      "strategy": "Cross-platform asset optimization.",
+      "precision": "Non-destructive editing.",
+      "architecture": "Layered visual narratives."
+    },
+    {
+      "id": 7,
+      "title": "Responsive & Mobile Web Design",
+      "desc": "From concept to launch, we create stunning and functional websites that provide a seamless experience on all devices.",
+      "icon": "Smartphone",
+      "img": "/responsive_design_hero.jpg",
+      "strategy": "Mobile-first philosophy.",
+      "precision": "Cross-device accessibility.",
+      "architecture": "Adaptive viewport logic."
+    },
+    {
+      "id": 8,
+      "title": "Web Building & Design",
+      "desc": "Leveraging frameworks and stylesheets for responsive, aesthetically pleasing designs from concept to launch.",
+      "icon": "LayoutTemplate",
+      "img": "/web_building_hero.jpg",
+      "strategy": "Full-stack aesthetics.",
+      "precision": "Harmonious color theory.",
+      "architecture": "Atomic design principles."
+    },
+    {
+      "id": 9,
+      "title": "Bootstrap & CSS",
+      "desc": "Building the foundational and interactive elements of your website using robust frameworks and performant stylesheets.",
+      "icon": "Wind",
+      "img": "/bootstrap_hero.jpg",
+      "strategy": "Performance-tuned UI.",
+      "precision": "Utility-first precision.",
+      "architecture": "Responsive grid systems."
+    },
+    {
+      "id": 10,
+      "title": "HTML & JavaScript",
+      "desc": "Delivering high-quality visuals and interactive experiences that enhance your brand using core web technologies.",
+      "icon": "Terminal",
+      "img": "/html_js_hero.jpg",
+      "strategy": "Real-time DOM interaction.",
+      "precision": "Performant script logic.",
+      "architecture": "Modern ES6+ structure."
+    },
+    {
+      "id": 11,
+      "title": "Graphic Design",
+      "desc": "Creating high-impact visual identities and brand assets through vector-level precision.",
+      "icon": "Palette",
+      "img": "/office.png",
+      "strategy": "Identity-driven visuals.",
+      "precision": "Vector-level accuracy.",
+      "architecture": "Brand DNA formulation."
+    },
+    {
+      "id": 12,
+      "title": "Microsoft Office & Excel",
+      "desc": "Enhancing productivity with advanced office tools and data-driven decision-making frameworks.",
+      "icon": "FileText",
+      "img": "/office_hero.jpg",
+      "strategy": "Data-driven decision making.",
+      "precision": "Functional formula math.",
+      "architecture": "Structured data tables."
+    }
+  ],
+  "work": [
+    {
+      "id": 1775931181263,
+      "title": "New Project",
+      "category": "UI/UX",
+      "img": "/uploads/1775931250730-Beige-Minimal-Website-Launch-Laptop-Mockup-Instagram-Post.png",
+      "icon": "Layers"
+    }
+  ],
+  "messages": []
+}

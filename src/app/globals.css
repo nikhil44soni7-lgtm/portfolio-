@@ -1,49 +1,235 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap');
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
-html {
-  height: 100%;
-}
-
-html,
-body {
-  max-width: 100vw;
-  overflow-x: hidden;
-}
-
-body {
-  min-height: 100%;
-  display: flex;
-  flex-direction: column;
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  /* Core Palette - Midnight Obsidian & Electric Teal (default) */
+  --primary: #00F2FF;
+  --primary-glow: rgba(0, 242, 255, 0.3);
+  --accent: #7A00FF;
+  --bg: #020408;
+  --card-bg: rgba(10, 15, 25, 0.7);
+  --text-main: #FFFFFF;
+  --text-sub: #94A3B8;
+  --glass: rgba(15, 23, 42, 0.6);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-highlight: rgba(255, 255, 255, 0.04);
+  --shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+  --gradient-main: linear-gradient(135deg, #00F2FF, #7A00FF);
+  /* Theme-reactive extras */
+  --nav-bg: rgba(2, 4, 8, 0.4);
+  --footer-bg: rgba(2, 4, 8, 1);
+  --mesh-1: rgba(0, 242, 255, 0.05);
+  --mesh-2: rgba(122, 0, 255, 0.05);
+  --bg-rgb: 2, 4, 8;
 }
 
 * {
-  box-sizing: border-box;
-  padding: 0;
   margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-a {
-  color: inherit;
+html {
+  scroll-behavior: initial;
+}
+
+body {
+  font-family: 'Outfit', sans-serif;
+  background: var(--bg);
+  color: var(--text-main);
+  overflow-x: hidden;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Background mesh for added texture */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    radial-gradient(circle at 20% 30%, var(--mesh-1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, var(--mesh-2) 0%, transparent 50%);
+  z-index: -2;
+  pointer-events: none;
+  transition: background 0.8s ease;
+}
+
+h1, h2, h3 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+#app {
+  width: 100%;
+}
+
+section {
+  min-height: 100vh;
+  padding: 10rem 10% 6rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+}
+
+.glass-container {
+  background: var(--glass);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  border-radius: 24px;
+  padding: 3rem;
+  box-shadow: var(--shadow);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Subtle corner highlight for glass effect */
+.glass-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, var(--glass-highlight) 0%, transparent 40%);
+  pointer-events: none;
+}
+
+.btn {
+  padding: 1.2rem 2.8rem;
+  border-radius: 12px;
+  border: 1px solid var(--glass-border);
+  background: var(--gradient-main);
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
   text-decoration: none;
+  display: inline-block;
+  width: fit-content;
+  position: relative;
+  overflow: hidden;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
+.btn::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+
+.btn:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 15px 30px var(--primary-glow);
+}
+
+.btn:hover::after {
+  opacity: 1;
+}
+
+/* Navigation handled in Header component */
+
+/* Service Cards - Immersive Experience */
+.service-card {
+  display: flex;
+  gap: 6rem;
+  align-items: center;
+  margin-bottom: 8rem;
+}
+
+.service-image {
+  flex: 1.2;
+  border-radius: 32px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  aspect-ratio: 16/10;
+  background: var(--card-bg);
+  border: 1px solid var(--glass-border);
+  transition: all 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.service-card:hover .service-image {
+  transform: scale(1.02) rotate(1deg);
+  border-color: var(--primary);
+}
+
+.service-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  opacity: 0.9;
+  transition: opacity 0.4s;
+}
+
+.service-card:hover .service-image img {
+  opacity: 1;
+}
+
+.service-info {
+  flex: 0.8;
+}
+
+.service-info h2 {
+  font-size: 4rem;
+  line-height: 1.1;
+  margin-bottom: 2rem;
+  background: linear-gradient(135deg, #fff 0%, #94A3B8 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Hero Section Polish */
+.hero h1 {
+  font-size: clamp(4rem, 12vw, 8rem);
+  line-height: 0.9;
+  letter-spacing: -0.04em;
+  background: linear-gradient(135deg, #fff 30%, var(--primary) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 2rem;
+}
+
+.hero p {
+  font-size: 1.4rem;
+  max-width: 700px;
+  margin: 0 auto 3rem;
+  opacity: 0.6;
+}
+
+/* Footer & Extras */
+footer {
+  padding: 6rem 10% 3rem;
+  border-top: 1px solid var(--glass-border);
+  background: var(--footer-bg);
+  transition: background 0.5s ease;
+}
+
+@media (max-width: 1024px) {
+  .service-card {
+    flex-direction: column !important;
+    gap: 3rem;
   }
+}
+
+.webgl-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  pointer-events: none;
 }
