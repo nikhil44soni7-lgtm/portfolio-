@@ -1,9 +1,9 @@
 'use client'
 
 import React, { useState, useEffect } from 'react'
-import { 
-    Plus, Trash2, Edit3, Save, X, Upload, Check, Lock, 
-    Globe, Database, Cpu, Monitor, Smartphone, LayoutTemplate, 
+import {
+    Plus, Trash2, Edit3, Save, X, Upload, Check, Lock,
+    Globe, Database, Cpu, Monitor, Smartphone, LayoutTemplate,
     Wind, Terminal, Palette, FileText, Layers, Video, Image as ImageIcon, MessageSquare
 } from 'lucide-react'
 
@@ -20,7 +20,7 @@ const Figma = ({ size = 24 }: { size?: number }) => (
 
 // Icon mapping for dynamic rendering
 const IconMap: Record<string, any> = {
-    Globe, Database, Cpu, Monitor, Figma, Smartphone, LayoutTemplate, 
+    Globe, Database, Cpu, Monitor, Figma, Smartphone, LayoutTemplate,
     Wind, Terminal, Palette, FileText, Layers, Video, ImageIcon
 }
 
@@ -126,15 +126,15 @@ const AdminPage = () => {
                 <form onSubmit={handleLogin} className="glass-container" style={{ padding: '4rem', width: '400px', textAlign: 'center' }}>
                     <Lock size={40} color="var(--primary)" style={{ marginBottom: '2rem' }} />
                     <h2 style={{ marginBottom: '2rem' }}>Secure Access</h2>
-                    <input 
-                        type="password" 
-                        value={password} 
-                        onChange={(e) => setPassword(e.target.value)} 
+                    <input
+                        type="password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
                         placeholder="Master Password"
-                        style={{ 
-                            width: '100%', 
-                            padding: '1.2rem', 
-                            background: 'rgba(255,255,255,0.05)', 
+                        style={{
+                            width: '100%',
+                            padding: '1.2rem',
+                            background: 'rgba(255,255,255,0.05)',
                             border: '1px solid var(--glass-border)',
                             borderRadius: '12px',
                             color: 'white',
@@ -157,11 +157,11 @@ const AdminPage = () => {
                     <p style={{ opacity: 0.5 }}>Manage your digital infrastructure and portfolio.</p>
                 </div>
                 <div style={{ display: 'flex', gap: '1rem', background: 'rgba(255,255,255,0.03)', padding: '0.5rem', borderRadius: '16px' }}>
-                    <button 
+                    <button
                         onClick={() => { setActiveTab('skills'); setEditingItem(null); }}
-                        style={{ 
-                            padding: '1rem 2rem', 
-                            borderRadius: '12px', 
+                        style={{
+                            padding: '1rem 2rem',
+                            borderRadius: '12px',
                             background: activeTab === 'skills' ? 'var(--primary)' : 'transparent',
                             color: activeTab === 'skills' ? 'black' : 'white',
                             border: 'none',
@@ -169,11 +169,11 @@ const AdminPage = () => {
                             fontWeight: 700
                         }}
                     >Skills</button>
-                    <button 
+                    <button
                         onClick={() => { setActiveTab('work'); setEditingItem(null); }}
-                        style={{ 
-                            padding: '1rem 2rem', 
-                            borderRadius: '12px', 
+                        style={{
+                            padding: '1rem 2rem',
+                            borderRadius: '12px',
                             background: activeTab === 'work' ? 'var(--primary)' : 'transparent',
                             color: activeTab === 'work' ? 'black' : 'white',
                             border: 'none',
@@ -181,11 +181,11 @@ const AdminPage = () => {
                             fontWeight: 700
                         }}
                     >Projects</button>
-                    <button 
+                    <button
                         onClick={() => { setActiveTab('messages'); setEditingItem(null); }}
-                        style={{ 
-                            padding: '1rem 2rem', 
-                            borderRadius: '12px', 
+                        style={{
+                            padding: '1rem 2rem',
+                            borderRadius: '12px',
                             background: activeTab === 'messages' ? 'var(--primary)' : 'transparent',
                             color: activeTab === 'messages' ? 'black' : 'white',
                             border: 'none',
@@ -213,11 +213,11 @@ const AdminPage = () => {
                         {activeTab === 'messages' ? (
                             data.messages?.length > 0 ? (
                                 data.messages.map((msg: any) => (
-                                    <div key={msg.id} style={{ 
-                                        padding: '2rem', 
-                                        background: 'rgba(255,255,255,0.02)', 
+                                    <div key={msg.id} style={{
+                                        padding: '2rem',
+                                        background: 'rgba(255,255,255,0.02)',
                                         border: '1px solid var(--glass-border)',
-                                        borderRadius: '16px' 
+                                        borderRadius: '16px'
                                     }}>
                                         <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '1.5rem' }}>
                                             <div>
@@ -226,14 +226,14 @@ const AdminPage = () => {
                                             </div>
                                             <div style={{ textAlign: 'right' }}>
                                                 <p style={{ fontSize: '0.8rem', opacity: 0.3 }}>{new Date(msg.timestamp).toLocaleString()}</p>
-                                                <button 
+                                                <button
                                                     onClick={() => {
-                                                        if(confirm('Delete message?')) {
+                                                        if (confirm('Delete message?')) {
                                                             const newData = { ...data, messages: data.messages.filter((m: any) => m.id !== msg.id) }
                                                             setData(newData)
                                                             saveChanges(newData)
                                                         }
-                                                    }} 
+                                                    }}
                                                     style={{ background: 'transparent', border: 'none', color: '#ff4444', cursor: 'pointer', marginTop: '0.5rem' }}
                                                 >
                                                     <Trash2 size={16} />
@@ -251,14 +251,14 @@ const AdminPage = () => {
                             )
                         ) : (
                             data[activeTab].map((item: any) => (
-                                <div key={item.id} style={{ 
-                                    display: 'flex', 
-                                    alignItems: 'center', 
-                                    justifyContent: 'space-between', 
-                                    padding: '1.5rem', 
-                                    background: 'rgba(255,255,255,0.02)', 
+                                <div key={item.id} style={{
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'space-between',
+                                    padding: '1.5rem',
+                                    background: 'rgba(255,255,255,0.02)',
                                     border: '1px solid var(--glass-border)',
-                                    borderRadius: '16px' 
+                                    borderRadius: '16px'
                                 }}>
                                     <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
                                         <div style={{ width: '50px', height: '50px', borderRadius: '12px', overflow: 'hidden', background: '#000' }}>
@@ -282,18 +282,18 @@ const AdminPage = () => {
                 {editingItem && (
                     <div className="glass-container" style={{ padding: '3rem', height: 'fit-content', position: 'sticky', top: '100px' }}>
                         <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '2.5rem' }}>
-                            <h3 style={{ fontSize: '1.2rem' }}>{data[activeTab].find((i:any) => i.id === editingItem.id) ? 'Edit' : 'Create'} Entry</h3>
+                            <h3 style={{ fontSize: '1.2rem' }}>{data[activeTab].find((i: any) => i.id === editingItem.id) ? 'Edit' : 'Create'} Entry</h3>
                             <button onClick={() => setEditingItem(null)} style={{ background: 'transparent', border: 'none', color: 'white', cursor: 'pointer' }}><X size={20} /></button>
                         </div>
 
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
                             <div style={{ textAlign: 'center' }}>
-                                <div style={{ 
-                                    width: '100%', 
-                                    height: '180px', 
-                                    borderRadius: '20px', 
-                                    background: '#000', 
-                                    marginBottom: '1rem', 
+                                <div style={{
+                                    width: '100%',
+                                    height: '180px',
+                                    borderRadius: '20px',
+                                    background: '#000',
+                                    marginBottom: '1rem',
                                     overflow: 'hidden',
                                     border: '1px dashed var(--glass-border)',
                                     display: 'flex',
@@ -302,18 +302,18 @@ const AdminPage = () => {
                                     position: 'relative'
                                 }}>
                                     {editingItem.img ? <img src={editingItem.img} style={{ width: '100%', height: '100%', objectFit: 'cover' }} /> : <ImageIcon opacity={0.2} size={40} />}
-                                    <label style={{ 
-                                        position: 'absolute', 
-                                        inset: 0, 
-                                        display: 'flex', 
-                                        alignItems: 'center', 
-                                        justifyContent: 'center', 
-                                        background: 'rgba(0,0,0,0.4)', 
+                                    <label style={{
+                                        position: 'absolute',
+                                        inset: 0,
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center',
+                                        background: 'rgba(0,0,0,0.4)',
                                         cursor: 'pointer',
                                         opacity: isUploading ? 1 : 0,
                                         transition: 'opacity 0.3s'
                                     }} onMouseEnter={(e) => e.currentTarget.style.opacity = '1'} onMouseLeave={(e) => e.currentTarget.style.opacity = '0'}>
-                                        <input type="file"  onChange={(e) => {
+                                        <input type="file" hidden onChange={(e) => {
                                             if (activeTab === "skills" || activeTab === "work") {
                                                 handleFileUpload(e, activeTab);
                                             }
@@ -326,41 +326,41 @@ const AdminPage = () => {
 
                             <div className="form-group">
                                 <label style={{ fontSize: '0.8rem', opacity: 0.5, display: 'block', marginBottom: '0.5rem' }}>Title</label>
-                                <input className="admin-input" value={editingItem.title} onChange={(e) => setEditingItem({...editingItem, title: e.target.value})} />
+                                <input className="admin-input" value={editingItem.title} onChange={(e) => setEditingItem({ ...editingItem, title: e.target.value })} />
                             </div>
 
                             {activeTab === 'skills' ? (
                                 <>
                                     <div className="form-group">
                                         <label style={{ fontSize: '0.8rem', opacity: 0.5, display: 'block', marginBottom: '0.5rem' }}>Icon Component</label>
-                                        <select className="admin-input" value={editingItem.icon} onChange={(e) => setEditingItem({...editingItem, icon: e.target.value})}>
+                                        <select className="admin-input" value={editingItem.icon} onChange={(e) => setEditingItem({ ...editingItem, icon: e.target.value })}>
                                             {Object.keys(IconMap).map(name => <option key={name} value={name}>{name}</option>)}
                                         </select>
                                     </div>
                                     <div className="form-group">
                                         <label style={{ fontSize: '0.8rem', opacity: 0.5, display: 'block', marginBottom: '0.5rem' }}>Description</label>
-                                        <textarea className="admin-input" value={editingItem.desc} onChange={(e) => setEditingItem({...editingItem, desc: e.target.value})} rows={3} />
+                                        <textarea className="admin-input" value={editingItem.desc} onChange={(e) => setEditingItem({ ...editingItem, desc: e.target.value })} rows={3} />
                                     </div>
                                     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
                                         <div className="form-group">
                                             <label style={{ fontSize: '0.7rem', opacity: 0.5 }}>Strategy</label>
-                                            <input className="admin-input" value={editingItem.strategy} onChange={(e) => setEditingItem({...editingItem, strategy: e.target.value})} />
+                                            <input className="admin-input" value={editingItem.strategy} onChange={(e) => setEditingItem({ ...editingItem, strategy: e.target.value })} />
                                         </div>
                                         <div className="form-group">
                                             <label style={{ fontSize: '0.7rem', opacity: 0.5 }}>Precision</label>
-                                            <input className="admin-input" value={editingItem.precision} onChange={(e) => setEditingItem({...editingItem, precision: e.target.value})} />
+                                            <input className="admin-input" value={editingItem.precision} onChange={(e) => setEditingItem({ ...editingItem, precision: e.target.value })} />
                                         </div>
                                     </div>
                                     <div className="form-group">
                                         <label style={{ fontSize: '0.7rem', opacity: 0.5 }}>Architecture</label>
-                                        <input className="admin-input" value={editingItem.architecture} onChange={(e) => setEditingItem({...editingItem, architecture: e.target.value})} />
+                                        <input className="admin-input" value={editingItem.architecture} onChange={(e) => setEditingItem({ ...editingItem, architecture: e.target.value })} />
                                     </div>
                                 </>
                             ) : (
                                 <>
                                     <div className="form-group">
                                         <label style={{ fontSize: '0.8rem', opacity: 0.5, display: 'block', marginBottom: '0.5rem' }}>Category</label>
-                                        <select className="admin-input" value={editingItem.category} onChange={(e) => setEditingItem({...editingItem, category: e.target.value})}>
+                                        <select className="admin-input" value={editingItem.category} onChange={(e) => setEditingItem({ ...editingItem, category: e.target.value })}>
                                             <option value="UI/UX">UI/UX</option>
                                             <option value="Graphic">Graphic</option>
                                             <option value="Video">Video</option>
@@ -368,7 +368,7 @@ const AdminPage = () => {
                                     </div>
                                     <div className="form-group">
                                         <label style={{ fontSize: '0.8rem', opacity: 0.5, display: 'block', marginBottom: '0.5rem' }}>Icon</label>
-                                        <select className="admin-input" value={editingItem.icon} onChange={(e) => setEditingItem({...editingItem, icon: e.target.value})}>
+                                        <select className="admin-input" value={editingItem.icon} onChange={(e) => setEditingItem({ ...editingItem, icon: e.target.value })}>
                                             {Object.keys(IconMap).map(name => <option key={name} value={name}>{name}</option>)}
                                         </select>
                                     </div>
