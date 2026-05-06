@@ -51,6 +51,7 @@ const AdminPage = () => {
     const saveChanges = async (updatedData = data) => {
         await fetch('/api/admin', {
             method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(updatedData)
         })
         fetchData()
