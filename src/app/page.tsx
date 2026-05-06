@@ -125,9 +125,9 @@ const HomePage = () => {
                     gsap.from(cards, {
                         y: 50, opacity: 0, duration: 0.9, stagger: 0.15,
                         immediateRender: false,
-                        scrollTrigger: { 
-                            trigger: group, 
-                            start: 'top 95%', 
+                        scrollTrigger: {
+                            trigger: group,
+                            start: 'top 95%',
                             once: true,
                         }
                     })
