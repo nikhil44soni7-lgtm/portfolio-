@@ -1,10 +1,11 @@
 'use client'
 
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback, useRef } from 'react'
 import {
-    Plus, Trash2, Edit3, Save, X, Upload, Check, Lock,
+    Plus, Trash2, Edit3, Save, X, Upload, Lock,
     Globe, Database, Cpu, Monitor, Smartphone, LayoutTemplate,
-    Wind, Terminal, Palette, FileText, Layers, Video, Image as ImageIcon, MessageSquare
+    Wind, Terminal, Palette, FileText, Layers, Video, Image as ImageIcon, MessageSquare,
+    RefreshCw
 } from 'lucide-react'
 
 // Custom Figma Icon SVG
@@ -29,15 +30,46 @@ const AdminPage = () => {
     const [password, setPassword] = useState('')
     const [activeTab, setActiveTab] = useState<'skills' | 'work' | 'messages'>('skills')
     const [data, setData] = useState<any>({ skills: [], work: [], messages: [] })
+    const [messages, setMessages] = useState<any[]>([])
     const [editingItem, setEditingItem] = useState<any>(null)
     const [isUploading, setIsUploading] = useState(false)
+    const [isRefreshing, setIsRefreshing] = useState(false)
+    const pollRef = useRef<ReturnType<typeof setInterval> | null>(null)
 
     useEffect(() => {
         fetchData()
     }, [])
 
+    // Re-fetch messages whenever Messages tab is opened
+    useEffect(() => {
+        if (activeTab === 'messages') {
+            fetchMessages()
+            // Auto-poll every 5 seconds while on messages tab
+            pollRef.current = setInterval(fetchMessages, 5000)
+        } else {
+            if (pollRef.current) clearInterval(pollRef.current)
+        }
+        return () => { if (pollRef.current) clearInterval(pollRef.current) }
+    }, [activeTab])
+
+    const fetchMessages = useCallback(async () => {
+        try {
+            const res = await fetch('/api/messages', { cache: 'no-store' })
+            const json = await res.json()
+            setMessages(json.messages || [])
+        } catch (e) {
+            console.error('Failed to fetch messages', e)
+        }
+    }, [])
+
+    const handleRefresh = async () => {
+        setIsRefreshing(true)
+        await fetchMessages()
+        setIsRefreshing(false)
+    }
+
     const fetchData = async () => {
-        const res = await fetch('/api/admin')
+        const res = await fetch('/api/admin', { cache: 'no-store' })
         const json = await res.json()
         setData(json)
     }
@@ -191,9 +223,20 @@ const AdminPage = () => {
                             color: activeTab === 'messages' ? 'black' : 'white',
                             border: 'none',
                             cursor: 'pointer',
-                            fontWeight: 700
+                            fontWeight: 700,
+                            position: 'relative'
                         }}
-                    >Messages</button>
+                    >
+                        Messages
+                        {messages.length > 0 && (
+                            <span style={{
+                                position: 'absolute', top: '6px', right: '6px',
+                                background: '#ef4444', color: 'white',
+                                borderRadius: '100px', fontSize: '0.65rem',
+                                padding: '1px 6px', fontWeight: 800
+                            }}>{messages.length}</span>
+                        )}
+                    </button>
                 </div>
             </div>
 
@@ -208,12 +251,26 @@ const AdminPage = () => {
                                 <Plus size={18} /> Add New
                             </button>
                         )}
+                        {activeTab === 'messages' && (
+                            <button
+                                onClick={handleRefresh}
+                                style={{
+                                    background: 'rgba(0,242,255,0.1)', border: '1px solid rgba(0,242,255,0.3)',
+                                    borderRadius: '12px', color: 'var(--primary)', cursor: 'pointer',
+                                    padding: '0.6rem 1.2rem', display: 'flex', alignItems: 'center', gap: '0.5rem',
+                                    fontSize: '0.85rem', fontWeight: 600, transition: 'all 0.3s'
+                                }}
+                            >
+                                <RefreshCw size={15} style={{ animation: isRefreshing ? 'spin 1s linear infinite' : 'none' }} />
+                                {isRefreshing ? 'Refreshing...' : 'Refresh'}
+                            </button>
+                        )}
                     </div>
 
                     <div style={{ display: 'grid', gap: '1rem' }}>
                         {activeTab === 'messages' ? (
-                            data.messages?.length > 0 ? (
-                                data.messages.map((msg: any) => (
+                            messages.length > 0 ? (
+                                messages.map((msg: any) => (
                                     <div key={msg.id} style={{
                                         padding: '2rem',
                                         background: 'rgba(255,255,255,0.02)',
@@ -228,11 +285,14 @@ const AdminPage = () => {
                                             <div style={{ textAlign: 'right' }}>
                                                 <p style={{ fontSize: '0.8rem', opacity: 0.3 }}>{new Date(msg.timestamp).toLocaleString()}</p>
                                                 <button
-                                                    onClick={() => {
+                                                    onClick={async () => {
                                                         if (confirm('Delete message?')) {
-                                                            const newData = { ...data, messages: data.messages.filter((m: any) => m.id !== msg.id) }
-                                                            setData(newData)
-                                                            saveChanges(newData)
+                                                            await fetch('/api/messages', {
+                                                                method: 'DELETE',
+                                                                headers: { 'Content-Type': 'application/json' },
+                                                                body: JSON.stringify({ id: msg.id })
+                                                            })
+                                                            fetchMessages()
                                                         }
                                                     }}
                                                     style={{ background: 'transparent', border: 'none', color: '#ff4444', cursor: 'pointer', marginTop: '0.5rem' }}
@@ -248,6 +308,7 @@ const AdminPage = () => {
                                 <div style={{ textAlign: 'center', padding: '4rem', opacity: 0.2 }}>
                                     <MessageSquare size={48} style={{ margin: '0 auto 1rem' }} />
                                     <p>No transmissions received yet.</p>
+                                    <p style={{ fontSize: '0.8rem', marginTop: '0.5rem' }}>Messages will appear here automatically.</p>
                                 </div>
                             )
                         ) : (
@@ -420,6 +481,10 @@ const AdminPage = () => {
                 .premium-btn:hover {
                     transform: translateY(-3px);
                     box-shadow: 0 10px 30px var(--primary-glow);
+                }
+                @keyframes spin {
+                    from { transform: rotate(0deg); }
+                    to { transform: rotate(360deg); }
                 }
             `}</style>
         </div>

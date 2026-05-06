@@ -2,6 +2,8 @@ import { NextResponse } from 'next/server'
 import fs from 'fs/promises'
 import path from 'path'
 
+// Dedicated messages storage - completely separate from db.json
+// On Vercel /tmp is writable; locally we use src/data/messages.json
 const isVercel = process.env.VERCEL === '1'
 const LOCAL_MSG_PATH = path.join(process.cwd(), 'src/data/messages.json')
 const TMP_MSG_PATH = '/tmp/portfolio_messages.json'
@@ -16,10 +18,25 @@ async function readMessages(): Promise<any[]> {
     }
 }
 
+async function writeMessages(messages: any[]) {
+    await fs.writeFile(MSG_PATH, JSON.stringify(messages, null, 2))
+}
+
+// GET — fetch all messages
+export async function GET() {
+    try {
+        const messages = await readMessages()
+        return NextResponse.json({ messages })
+    } catch (error) {
+        console.error('Messages GET error:', error)
+        return NextResponse.json({ messages: [] })
+    }
+}
+
+// POST — add a new message
 export async function POST(request: Request) {
     try {
-        const body = await request.json()
-        const { name, email, message } = body
+        const { name, email, message } = await request.json()
 
         if (!name || !email || !message) {
             return NextResponse.json(
@@ -40,14 +57,28 @@ export async function POST(request: Request) {
         }
 
         const updated = [newMessage, ...messages]
-        await fs.writeFile(MSG_PATH, JSON.stringify(updated, null, 2))
+        await writeMessages(updated)
 
         return NextResponse.json({ success: true })
     } catch (error) {
-        console.error('Contact API Error:', error)
+        console.error('Messages POST error:', error)
         return NextResponse.json(
             { success: false, error: 'Failed to save message' },
             { status: 500 }
         )
+    }
+}
+
+// DELETE — delete a message by id
+export async function DELETE(request: Request) {
+    try {
+        const { id } = await request.json()
+        const messages = await readMessages()
+        const updated = messages.filter((m: any) => m.id !== id)
+        await writeMessages(updated)
+        return NextResponse.json({ success: true })
+    } catch (error) {
+        console.error('Messages DELETE error:', error)
+        return NextResponse.json({ success: false }, { status: 500 })
     }
 }
