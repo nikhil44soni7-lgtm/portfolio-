@@ -4,12 +4,19 @@ import React, { useEffect, useRef, useState } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import {
-    ArrowRight, Monitor, Layers, Video, Globe,
+    ArrowRight, Monitor, Layers, Video, Globe, Database, Cpu, Smartphone,
+    LayoutTemplate, Wind, Terminal, Palette, FileText, Image as ImageIcon,
     Star, Quote, Send, Mail, MessageSquare,
     Camera, MessageCircle, Code2,
     Play, ChevronLeft, ChevronRight
 } from 'lucide-react'
 import Link from 'next/link'
+
+// Map string icon names to components for DB-sourced data
+const IconMap: Record<string, any> = {
+    Globe, Database, Cpu, Monitor, Smartphone, LayoutTemplate,
+    Wind, Terminal, Palette, FileText, Layers, Video, ImageIcon
+}
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -105,7 +112,8 @@ const HomePage = () => {
             reveals.forEach((el: any) => {
                 gsap.from(el, {
                     y: 60, opacity: 0, duration: 1.2,
-                    scrollTrigger: { trigger: el, start: 'top 85%', toggleActions: 'play none none reverse' }
+                    immediateRender: false,
+                    scrollTrigger: { trigger: el, start: 'top 95%', once: true }
                 })
             })
 
@@ -116,11 +124,11 @@ const HomePage = () => {
                 if (cards.length > 0) {
                     gsap.from(cards, {
                         y: 50, opacity: 0, duration: 0.9, stagger: 0.15,
+                        immediateRender: false,
                         scrollTrigger: { 
                             trigger: group, 
-                            start: 'top 80%', 
-                            toggleActions: 'play none none reverse',
-                            onEnter: () => ScrollTrigger.refresh()
+                            start: 'top 95%', 
+                            once: true,
                         }
                     })
                 }
@@ -386,7 +394,7 @@ const HomePage = () => {
                             border: '1px solid var(--glass-border)'
                         }}>
                             <img
-                                src="/profile.png"
+                                src="/profile.jpg"
                                 alt="Harshita Soni"
                                 style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                             />
@@ -501,64 +509,59 @@ const HomePage = () => {
                     gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
                     gap: '2rem'
                 }}>
-                    {(dbData.skills.length > 0 ? dbData.skills.slice(0, 4) : [
-                        { icon: Layers, title: 'UI/UX Design', desc: 'Behavioral mapping, wireframes, prototypes.', color: '#00F2FF' },
-                        { icon: Monitor, title: 'Graphic Design', desc: 'Brand identities and visual storytelling.', color: '#7A00FF' },
-                        { icon: Video, title: 'Video Editing', desc: 'Cinematic promotional videos and reels.', color: '#00F2FF' },
-                        { icon: Globe, title: 'Web Development', desc: 'Responsive and performant web experiences.', color: '#7A00FF' }
-                    ]).map((service, i) => {
-                        const Icon = typeof service.icon === 'string' ? (service.icon === 'Layers' ? Layers : service.icon === 'Monitor' ? Monitor : service.icon === 'Video' ? Video : service.icon === 'Globe' ? Globe : Layers) : service.icon
-                        const color = service.color || (i % 2 === 0 ? '#00F2FF' : '#7A00FF')
-                        
-                        return (
-                            <div key={i} className="stagger-card service-hover-card" style={{
-                                background: 'var(--glass)',
-                                backdropFilter: 'blur(20px)',
-                                border: '1px solid var(--glass-border)',
-                                borderRadius: '28px',
-                                padding: '3rem',
-                                position: 'relative',
-                                overflow: 'hidden',
-                                cursor: 'default',
-                                transition: 'all 0.4s cubic-bezier(0.23, 1, 0.32, 1)'
+                    {[
+                        { Icon: Layers, title: 'UI/UX Design', desc: 'Behavioral mapping, wireframes, high-fidelity prototypes, and user flow optimization.', color: '#00F2FF', tags: ['Figma', 'Prototyping', 'User Research'] },
+                        { Icon: Monitor, title: 'Graphic Design', desc: 'Premium brand identities, visual storytelling, and print-ready design assets.', color: '#7A00FF', tags: ['Branding', 'Illustration', 'Print'] },
+                        { Icon: Video, title: 'Video Editing', desc: 'Cinematic promotional videos, motion graphics, and high-impact social reels.', color: '#00F2FF', tags: ['Premiere Pro', 'Motion', 'Color Grading'] },
+                        { Icon: Globe, title: 'Web Development', desc: 'Responsive, performant web experiences built with modern frameworks and clean code.', color: '#7A00FF', tags: ['Next.js', 'React', 'HTML/CSS'] }
+                    ].map((service, i) => (
+                        <div key={i} className="stagger-card service-hover-card" style={{
+                            background: 'var(--glass)',
+                            backdropFilter: 'blur(20px)',
+                            border: '1px solid var(--glass-border)',
+                            borderRadius: '28px',
+                            padding: '3rem',
+                            position: 'relative',
+                            overflow: 'hidden',
+                            cursor: 'default',
+                            transition: 'all 0.4s cubic-bezier(0.23, 1, 0.32, 1)'
+                        }}>
+                            {/* Glow accent */}
+                            <div style={{
+                                position: 'absolute', top: '-40px', right: '-40px',
+                                width: '150px', height: '150px', borderRadius: '50%',
+                                background: `radial-gradient(circle, ${service.color}20 0%, transparent 70%)`,
+                                pointerEvents: 'none', transition: 'all 0.4s'
+                            }} />
+
+                            <div style={{
+                                width: '60px', height: '60px', borderRadius: '18px',
+                                background: `linear-gradient(135deg, ${service.color}20, ${service.color}10)`,
+                                border: `1px solid ${service.color}30`,
+                                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                                marginBottom: '2rem'
                             }}>
-                                {/* Glow accent */}
-                                <div style={{
-                                    position: 'absolute', top: '-40px', right: '-40px',
-                                    width: '150px', height: '150px', borderRadius: '50%',
-                                    background: `radial-gradient(circle, ${color}20 0%, transparent 70%)`,
-                                    pointerEvents: 'none', transition: 'all 0.4s'
-                                }} />
-
-                                <div style={{
-                                    width: '60px', height: '60px', borderRadius: '18px',
-                                    background: `linear-gradient(135deg, ${color}20, ${color}10)`,
-                                    border: `1px solid ${color}30`,
-                                    display: 'flex', alignItems: 'center', justifyContent: 'center',
-                                    marginBottom: '2rem'
-                                }}>
-                                    <Icon size={28} color={color} />
-                                </div>
-
-                                <h3 style={{ fontSize: '1.6rem', marginBottom: '1rem' }}>{service.title}</h3>
-                                <p style={{ fontSize: '0.95rem', color: 'var(--text-sub)', lineHeight: 1.7, marginBottom: '2rem', opacity: 0.8 }}>{service.desc}</p>
-
-                                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
-                                    {(service.tags || ['Design', 'Creative']).map((tag: any) => (
-                                        <span key={tag} style={{
-                                            padding: '0.3rem 0.9rem',
-                                            background: `${color}12`,
-                                            border: `1px solid ${color}25`,
-                                            borderRadius: '100px',
-                                            fontSize: '0.75rem',
-                                            color: color,
-                                            fontWeight: 500
-                                        }}>{tag}</span>
-                                    ))}
-                                </div>
+                                <service.Icon size={28} color={service.color} />
                             </div>
-                        )
-                    })}
+
+                            <h3 style={{ fontSize: '1.6rem', marginBottom: '1rem' }}>{service.title}</h3>
+                            <p style={{ fontSize: '0.95rem', color: 'var(--text-sub)', lineHeight: 1.7, marginBottom: '2rem', opacity: 0.8 }}>{service.desc}</p>
+
+                            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
+                                {service.tags.map((tag) => (
+                                    <span key={tag} style={{
+                                        padding: '0.3rem 0.9rem',
+                                        background: `${service.color}12`,
+                                        border: `1px solid ${service.color}25`,
+                                        borderRadius: '100px',
+                                        fontSize: '0.75rem',
+                                        color: service.color,
+                                        fontWeight: 500
+                                    }}>{tag}</span>
+                                ))}
+                            </div>
+                        </div>
+                    ))}
                 </div>
 
                 <style>{`
@@ -596,12 +599,12 @@ const HomePage = () => {
                     gridAutoRows: '280px',
                     gap: '1.5rem'
                 }}>
-                    {(dbData.work.length > 0 ? dbData.work.slice(0, 4) : [
+                    {[
                         { title: 'Brand Identity System', category: 'Branding', img: '/web_dev_hero.jpg' },
                         { title: 'Mobile UI/UX Design', category: 'UI/UX', img: '/ui_design_hero.jpg' },
                         { title: 'Campaign Video Edit', category: 'Video Editing', img: '/adobe_suite_hero.jpg' },
                         { title: 'E-Commerce Web App', category: 'Development', img: '/responsive_design_hero.jpg' }
-                    ]).map((proj, i) => {
+                    ].map((proj, i) => {
                         const colSpans = [7, 5, 5, 7, 6, 6]
                         const span = colSpans[i % colSpans.length]
                         return (
@@ -627,7 +630,7 @@ const HomePage = () => {
                                         color: 'var(--primary)', fontSize: '0.75rem',
                                         textTransform: 'uppercase', letterSpacing: '3px',
                                         marginBottom: '0.8rem', fontWeight: 600
-                                    }}>{proj.category || proj.tag}</span>
+                                    }}>{proj.category}</span>
                                     <h3 style={{ fontSize: '1.5rem', lineHeight: 1.2 }}>{proj.title}</h3>
                                     <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginTop: '1rem', color: 'var(--primary)' }}>
                                         <span style={{ fontSize: '0.85rem', fontWeight: 600 }}>View Case Study</span>
